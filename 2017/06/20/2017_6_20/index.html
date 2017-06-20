@@ -6,17 +6,31 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="//tusick.me">
-  <title>Archives: 2017/5 | 生菜的博客</title>
+  <title>myBatis中的_parameter | 生菜的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端小白一枚，目前努力深造中">
-<meta property="og:type" content="website">
-<meta property="og:title" content="生菜的博客">
-<meta property="og:url" content="//tusick.me/archives/2017/05/index.html">
+  <meta name="description" content="生活所想">
+<meta name="keywords" content="mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="myBatis中的_parameter">
+<meta property="og:url" content="//tusick.me/2017/06/20/2017_6_20/index.html">
 <meta property="og:site_name" content="生菜的博客">
-<meta property="og:description" content="前端小白一枚，目前努力深造中">
+<meta property="og:description" content="生活所想">
+<meta property="og:image" content="//tusick.me/img/2017-6-20/wrong.png">
+<meta property="og:image" content="//tusick.me/img/2017-6-20/jsp-modal.png">
+<meta property="og:image" content="//tusick.me/img/2017-6-20/jsp-js.png">
+<meta property="og:image" content="//tusick.me/img/2017-6-20/contro.png">
+<meta property="og:image" content="//tusick.me/img/2017-6-20/service.png">
+<meta property="og:image" content="//tusick.me/img/2017-6-20/mapper.png">
+<meta property="og:image" content="//tusick.me/img/2017-6-20/xml-1.png">
+<meta property="og:image" content="//tusick.me/img/2017-6-20/xml-2.png">
+<meta property="og:image" content="//tusick.me/img/2017-6-20/htm.png">
+<meta property="og:image" content="//tusick.me/img/2017-6-20/xml-1-now.png">
+<meta property="og:image" content="//tusick.me/img/2017-6-20/htm-good.png">
+<meta property="og:updated_time" content="2017-06-20T07:35:38.178Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="生菜的博客">
-<meta name="twitter:description" content="前端小白一枚，目前努力深造中">
+<meta name="twitter:title" content="myBatis中的_parameter">
+<meta name="twitter:description" content="生活所想">
+<meta name="twitter:image" content="//tusick.me/img/2017-6-20/wrong.png">
   
     <link rel="alternative" href="/atom.xml" title="生菜的博客" type="application/atom+xml">
   
@@ -138,136 +152,173 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2017_6_20" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      myBatis中的_parameter
+    </h1>
+  
+
+        
+        <a href="/2017/06/20/2017_6_20/" class="archive-article-date">
+  	<time datetime="2017-06-20T10:38:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今日写的一块查询功能，遇到下面这样一个问题，以为什么地方没有定义好，全部检查了一遍结果并没有发现错误，<br><img src="/img/2017-6-20/wrong.png"><br>问题出现在原本只是根据从第一张表获取到的id作为第二张表相关信息的pid来查询所有有关内容，<br>后来加入了查询的几个参数后，再调试便出现上述的异常<br><a id="more"></a></p>
+<p>相关代码po一下：</p>
+<p>jsp的modal<br><img src="/img/2017-6-20/jsp-modal.png"></p>
+<p>jsp的js<br><img src="/img/2017-6-20/jsp-js.png"></p>
+<p>controller<br><img src="/img/2017-6-20/contro.png"></p>
+<p>service<br><img src="/img/2017-6-20/service.png"></p>
+<p>mapper<br><img src="/img/2017-6-20/mapper.png"></p>
+<p>xml-1<br><img src="/img/2017-6-20/xml-1.png"></p>
+<p>xml-2<br><img src="/img/2017-6-20/xml-2.png"></p>
+<p>页面中<br><img src="/img/2017-6-20/htm.png"></p>
+<p>初一看个人感觉没错误，也是按照以前的写法风格，结果这里加上查询的几个参数后出现问题，<br>百度了一下，矛头指向xml-1中的vpnUserPidSelectByPageCount</p>
+<blockquote>
+<p>在使用mybaitis传参数的时候，如果仅传入一个类型为String的参数，那么在<br>xml文件中应该使用_parameter来代替参数名。</p>
+</blockquote>
+<p>试着修改了下代码，<br>改后xml-1<br><img src="/img/2017-6-20/xml-1-now.png"></p>
+<p>结果页面中显示完好，并且相关查询正常<br><img src="/img/2017-6-20/htm-good.png"></p>
+<p>这里提出一个疑问，为什么以前写的相关查询并不需要将字段参数名改为_parameter，而再这里却需要？</p>
+<p>结合相关知识后，归纳为有一下几种</p>
+<blockquote>
+<p>1.使用的简单数据类型,<br>需要if test的情况，需使用<if test="_parameter != null && _parameter !=''">,此处一定使用_parameter != null而不是原参数名 != null</if></p>
+<p>2.使用的一个对象数据类型,<br>如#{dotname,jdbcType=VARCHAR}中的dotname一定要使用user对象的属性名</p>
+<p>3.使用的多个对象数据类型<br>List<user> select(String pid,Page page),此时if test一定要<if test="_parameter.get("0").pid != null"> where语句where pid = #{0.pid,jdbcType=CHAR}</if></user></p>
+<p>4.使用的集合类型<br>5.使用的对象类型中的集合属性</p>
+</blockquote>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>你太客气了^▽^<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/26/2017_5_26/" class="archive-article-date">
-  	<time datetime="2017-05-26T08:26:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/26/2017_5_26/">mybatis的分页查询</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://tusick.me/2017/06/20/2017_6_20/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/23/2017-5-23/" class="archive-article-date">
-  	<time datetime="2017-05-23T02:07:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-23</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/23/2017-5-23/">CSS预处理器-Less的小白入门1</a>
-    </h1>
+  
+    <a href="/2017/05/26/2017_5_26/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mybatis的分页查询</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/20/my-first-blog/" class="archive-article-date">
-  	<time datetime="2017-05-20T09:42:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/20/my-first-blog/">myFirstblog</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -290,8 +341,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
