@@ -15,22 +15,22 @@
 <meta property="og:url" content="//tusick.me/2017/06/20/2017_6_20/index.html">
 <meta property="og:site_name" content="生菜的博客">
 <meta property="og:description" content="生活所想">
-<meta property="og:image" content="//tusick.me/img/2017-6-20/wrong.png">
-<meta property="og:image" content="//tusick.me/img/2017-6-20/jsp-modal.png">
-<meta property="og:image" content="//tusick.me/img/2017-6-20/jsp-js.png">
-<meta property="og:image" content="//tusick.me/img/2017-6-20/contro.png">
-<meta property="og:image" content="//tusick.me/img/2017-6-20/service.png">
-<meta property="og:image" content="//tusick.me/img/2017-6-20/mapper.png">
-<meta property="og:image" content="//tusick.me/img/2017-6-20/xml-1.png">
-<meta property="og:image" content="//tusick.me/img/2017-6-20/xml-2.png">
-<meta property="og:image" content="//tusick.me/img/2017-6-20/htm.png">
-<meta property="og:image" content="//tusick.me/img/2017-6-20/xml-1-now.png">
-<meta property="og:image" content="//tusick.me/img/2017-6-20/htm-good.png">
-<meta property="og:updated_time" content="2017-06-21T06:16:53.017Z">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-20/wrong.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-20/jsp-modal.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-20/jsp-js.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-20/contro.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-20/service.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-20/mapper.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-20/xml-1.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-20/xml-2.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-20/htm.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-20/xml-1-now.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-20/htm-good.png">
+<meta property="og:updated_time" content="2017-06-21T07:29:21.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="myBatis中的_parameter">
 <meta name="twitter:description" content="生活所想">
-<meta name="twitter:image" content="//tusick.me/img/2017-6-20/wrong.png">
+<meta name="twitter:image" content="//tusick.me/img/blogimg/2017-6-20/wrong.png">
   
     <link rel="alternative" href="/atom.xml" title="生菜的博客" type="application/atom+xml">
   
@@ -172,22 +172,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今日写的一块查询功能，遇到下面这样一个问题，以为什么地方没有定义好，全部检查了一遍结果并没有发现错误，<br><img src="/img/2017-6-20/wrong.png"><br>问题出现在原本只是根据从第一张表获取到的id作为第二张表相关信息的pid来查询所有有关内容，<br>后来加入了查询的几个参数后，再调试便出现上述的异常<br><a id="more"></a></p>
+        <p>今日写的一块查询功能，遇到下面这样一个问题，以为什么地方没有定义好，全部检查了一遍结果并没有发现错误，<br><img src="/img/blogimg/2017-6-20/wrong.png"><br>问题出现在原本只是根据从第一张表获取到的id作为第二张表相关信息的pid来查询所有有关内容，<br>后来加入了查询的几个参数后，再调试便出现上述的异常<br><a id="more"></a></p>
 <p>相关代码po一下：</p>
-<p>jsp的modal<br><img src="/img/2017-6-20/jsp-modal.png"></p>
-<p>jsp的js<br><img src="/img/2017-6-20/jsp-js.png"></p>
-<p>controller<br><img src="/img/2017-6-20/contro.png"></p>
-<p>service<br><img src="/img/2017-6-20/service.png"></p>
-<p>mapper<br><img src="/img/2017-6-20/mapper.png"></p>
-<p>xml-1<br><img src="/img/2017-6-20/xml-1.png"></p>
-<p>xml-2<br><img src="/img/2017-6-20/xml-2.png"></p>
-<p>页面中<br><img src="/img/2017-6-20/htm.png"></p>
+<p>jsp的modal<br><img src="/img/blogimg/2017-6-20/jsp-modal.png"></p>
+<p>jsp的js<br><img src="/img/blogimg/2017-6-20/jsp-js.png"></p>
+<p>controller<br><img src="/img/blogimg/2017-6-20/contro.png"></p>
+<p>service<br><img src="/img/blogimg/2017-6-20/service.png"></p>
+<p>mapper<br><img src="/img/blogimg/2017-6-20/mapper.png"></p>
+<p>xml-1<br><img src="/img/blogimg/2017-6-20/xml-1.png"></p>
+<p>xml-2<br><img src="/img/blogimg/2017-6-20/xml-2.png"></p>
+<p>页面中<br><img src="/img/blogimg/2017-6-20/htm.png"></p>
 <p>初一看个人感觉没错误，也是按照以前的写法风格，结果这里加上查询的几个参数后出现问题，<br>百度了一下，矛头指向xml-1中的vpnUserPidSelectByPageCount</p>
 <blockquote>
 <p>在使用mybaitis传参数的时候，如果仅传入一个类型为String的参数，那么在<br>xml文件中应该使用_parameter来代替参数名。</p>
 </blockquote>
-<p>试着修改了下代码，<br>改后xml-1<br><img src="/img/2017-6-20/xml-1-now.png"></p>
-<p>结果页面中显示完好，并且相关查询正常<br><img src="/img/2017-6-20/htm-good.png"></p>
+<p>试着修改了下代码，<br>改后xml-1<br><img src="/img/blogimg/2017-6-20/xml-1-now.png"></p>
+<p>结果页面中显示完好，并且相关查询正常<br><img src="/img/blogimg/2017-6-20/htm-good.png"></p>
 <p>这里提出一个疑问，为什么以前写的相关查询并不需要将字段参数名改为_parameter，而再这里却需要？</p>
 <p>结合相关知识后，归纳为有一下几种</p>
 <blockquote>
@@ -415,11 +415,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssm</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssm</a>
               </li>
             
             <div class="clearfix"></div>
