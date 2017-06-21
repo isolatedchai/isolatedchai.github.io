@@ -140,6 +140,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2017_6_21" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/21/2017_6_21/">ssm中的模板文件下载</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/21/2017_6_21/" class="archive-article-date">
+  	<time datetime="2017-06-21T09:11:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今日在写一个关于范例模板下载的小小小功能，直接把demo文件放在包里面的一个文件夹中，用户点击直接下载这个模板进行后续操作。</p>
+<p>关键代码</p>
+<hr>
+<p>jsp中，直接放在一个&lt;a&gt;标签中，</p>
+<pre><code>&lt;a href=&quot;${base}/vpnManage/templetdownload &quot; class=&quot;btn btn-success&quot; style=&quot;float:left;margin-left: 5px;&quot;&gt;模板下载&lt;/a&gt;
+</code></pre><p>Filestemplet_down  文件下载方法 放在AttachmentController类中</p>
+<pre><code>public static void Filestemplet_down(HttpServletRequest request,HttpServletResponse response,String filePath){
+    String realPath = request.getSession().getServletContext().getRealPath(filePath);
+    File file = new File(realPath);
+    String filenames=file.getName();
+    InputStream inputStream;
+    try{
+        inputStream = new BufferedInputStream(new FileInputStream(file));
+        byte[] buffer = new byte[inputStream.available()];
+        inputStream.read(buffer);
+        inputStream.close();
+        response.reset();
+        response.addHeader(&quot;Content-Disposition&quot;,&quot;attachment;filename=&quot; + new String(filenames.replaceAll(&quot; &quot;,&quot;&quot;).getBytes(&quot;utf-8&quot;),&quot;iso8859-1&quot;));
+        response.addHeader(&quot;Content-Length&quot;,&quot;&quot;+file.length());
+        OutputStream os = new BufferedOutputStream(response.getOutputStream());
+        response.setContentType(&quot;application/octet-stream&quot;);
+        os.write(buffer);
+        os.flush();
+        os.close();
+
+    }catch(Exception e){
+        e.printStackTrace();
+    }
+}
+</code></pre><p>在自己的VpnManageController中调用这个方法<br>并设置路径在WebRoot/resources/templet下</p>
+<pre><code>//模板下载
+@RequestMapping(value=&quot;templetdownload&quot;)
+public void templetdownload(HttpServletRequest request,HttpServletResponse response){
+
+    AttachmentController.Filestemplet_down(request,response,&quot;/resources/templet/demo.xls&quot;);
+
+}
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/21/2017_6_21/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-2017_6_20" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -176,7 +271,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssm</a>
         		</li>
       		
 		</ul>
@@ -473,7 +568,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mybatis</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssm</a>
               </li>
              
               <li class="article-tag-list-item">
