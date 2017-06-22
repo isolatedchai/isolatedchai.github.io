@@ -6,17 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="//tusick.me">
-  <title>Archives: 2017/6 | 生菜的博客</title>
+  <title>ssm中的详情弹出 | 生菜的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端小白一枚，目前努力深造中">
-<meta property="og:type" content="website">
-<meta property="og:title" content="生菜的博客">
-<meta property="og:url" content="//tusick.me/archives/2017/06/index.html">
+  <meta name="description" content="生活所想">
+<meta name="keywords" content="ssm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssm中的详情弹出">
+<meta property="og:url" content="//tusick.me/2017/06/22/2017_6_22/index.html">
 <meta property="og:site_name" content="生菜的博客">
-<meta property="og:description" content="前端小白一枚，目前努力深造中">
+<meta property="og:description" content="生活所想">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-22/update.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-22/show.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-22/result.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-22/update.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-22/show.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-6-22/result2.png">
+<meta property="og:updated_time" content="2017-06-22T07:04:15.756Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="生菜的博客">
-<meta name="twitter:description" content="前端小白一枚，目前努力深造中">
+<meta name="twitter:title" content="ssm中的详情弹出">
+<meta name="twitter:description" content="生活所想">
+<meta name="twitter:image" content="//tusick.me/img/blogimg/2017-6-22/update.png">
   
     <link rel="alternative" href="/atom.xml" title="生菜的博客" type="application/atom+xml">
   
@@ -138,36 +147,127 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-2017_6_22" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      ssm中的详情弹出
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/22/2017_6_22/" class="archive-article-date">
+
+        
+        <a href="/2017/06/22/2017_6_22/" class="archive-article-date">
   	<time datetime="2017-06-22T09:11:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/22/2017_6_22/">ssm中的详情弹出</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>表中有时候显示的一块内容过长不能全部显示出来，<br>在这里可以通过另显示一个模态框，点击这段文字可以在弹出的模态框中显示全文</p>
+<a id="more"></a>
+<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><p>jsp的代码新建立一个模态框allInfoModal：</p>
+<pre><code>&lt;!-- 缩略-详细信息 --&gt;
+&lt;div class=&quot;modal fade bs-example-modal-lg&quot; id=&quot;allInfoModal&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-labelledby=&quot;myModalLabel&quot;
+ aria-hidden=&quot;true&quot; style=&quot;z-index: 10000&quot;&gt;
+    &lt;div class=&quot;modal-dialog modal-lg&quot;&gt;
+        &lt;div class=&quot;modal-content&quot;&gt;
+            &lt;div class=&quot;modal-header&quot;&gt;
+                &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
+                &lt;h4 class=&quot;modal-title&quot;&gt;详情&lt;/h4&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;modal-body&quot;&gt;
+                &lt;div class=&quot;row&quot;&gt;
+                    &lt;div class=&quot;form-group col-md-12 col-xs-12&quot;&gt;
+                        &lt;textarea class=&quot;form-control&quot; id=&quot;info&quot; rows=&quot;8&quot;&gt;&lt;/textarea&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;modal-footer&quot;&gt;
+                &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-dismiss=&quot;modal&quot;&gt;关闭&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><!-- 缩略-详细信息完 -->
+<p>在js中 对remark备注这个字段进行判定<br>如果不为空并且长度大于10，则将第10个字符的后面全部替换为 ‘…’<br>并且加上一个超链接</p>
+<pre><code>//在table定义中
+if (res.rows[i].remark != null &amp;&amp; res.rows[i].remark.length &gt; 10) {
+       res.rows[i].remark = &quot;&lt;a  href=&apos;#&apos; onclick=&apos;showAllInfo(\&quot;&quot; + res.rows[i].remark.replace(/[\r\n]/g, &quot;&quot;) + &quot;\&quot;)&apos;&gt;&quot; + res.rows[i].remark.substring(0, 10) + &quot;...&lt;/a&gt;&quot;;
+}
 
-        <div class="article-info info-on-right">
-          
+
+//详情显示
+function showAllInfo(info){
+    $(&quot;#info&quot;).val(info);
+    $(&quot;#allInfoModal&quot;).modal(&apos;show&apos;);
+}         
+</code></pre><p>看看效果：</p>
+<p>在修改里面对备注进行修改<br><img src="/img/blogimg/2017-6-22/update.png">   </p>
+<p>界面上点击备注第三条<br><img src="/img/blogimg/2017-6-22/show.png">   </p>
+<p>弹出来的详细信息<br><img src="/img/blogimg/2017-6-22/result.png">   </p>
+<p>完成！呃好像还有些bug，在修改页面里面写的多段在这里全部挤到一起了。</p>
+<h2 id="关键代码new"><a href="#关键代码new" class="headerlink" title="关键代码new"></a>关键代码new</h2><p>对js中进行小修改</p>
+<pre><code>//在table定义中
+if (res.rows[i].remark != null &amp;&amp; res.rows[i].remark.length &gt; 10) {
+  res.rows[i].remark = &quot;&lt;a  href=&apos;#&apos; onclick=&apos;showAllInfo(\&quot;&quot; + rep(res.rows[i].remark) + &quot;\&quot;)&apos;&gt;&quot; + res.rows[i].remark.substring(0, 12) + &quot;...&lt;/a&gt;&quot;;
+}
+
+//详情显示
+function showAllInfo(info){
+    $(&quot;#info&quot;).val(repp(info));
+    $(&quot;#allInfoModal&quot;).modal(&apos;show&apos;);
+}
+
+//关于详情显示里面换行
+function rep(string){
+    var str=string.replaceAll(&quot;\n&quot;, &quot;&amp;&amp;br&amp;&amp;&quot;);
+    return str;
+}
+function repp(string){
+    var str=string.replaceAll(&quot;&amp;&amp;br&amp;&amp;&quot;, &quot;\n&quot;);
+    return str;
+}
+String.prototype.replaceAll = function(s1,s2){
+    return this.replace(new RegExp(s1,&quot;gm&quot;),s2);
+}
+</code></pre><p>再看看效果：</p>
+<p>在修改里面对备注进行修改<br><img src="/img/blogimg/2017-6-22/update.png">   </p>
+<p>界面上点击备注第三条<br><img src="/img/blogimg/2017-6-22/show.png">   </p>
+<p>弹出来的详细信息<br><img src="/img/blogimg/2017-6-22/result2.png">   </p>
+<p>这样就小功告成了</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>你太客气了^▽^<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -179,57 +279,89 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://tusick.me/2017/06/22/2017_6_22/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/21/2017_6_21/" class="archive-article-date">
-  	<time datetime="2017-06-21T09:11:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-21</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/21/2017_6_21/">ssm中的模板文件下载</a>
-    </h1>
+  
+    <a href="/2017/06/21/2017_6_21/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ssm中的模板文件下载</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -252,8 +384,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
