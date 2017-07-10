@@ -6,17 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="//tusick.me">
-  <title>Archives: 2017 | 生菜的博客</title>
+  <title>ssm-导出报表 | 生菜的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端小白一枚，目前努力深造中">
-<meta property="og:type" content="website">
-<meta property="og:title" content="生菜的博客">
-<meta property="og:url" content="//tusick.me/archives/2017/index.html">
+  <meta name="description" content="生活所想">
+<meta name="keywords" content="ssm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssm-导出报表">
+<meta property="og:url" content="//tusick.me/2017/07/11/2017_7_11/index.html">
 <meta property="og:site_name" content="生菜的博客">
-<meta property="og:description" content="前端小白一枚，目前努力深造中">
+<meta property="og:description" content="生活所想">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-7-11/导出页面.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-7-11/导出报表.png">
+<meta property="og:updated_time" content="2017-07-10T09:17:58.694Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="生菜的博客">
-<meta name="twitter:description" content="前端小白一枚，目前努力深造中">
+<meta name="twitter:title" content="ssm-导出报表">
+<meta name="twitter:description" content="生活所想">
+<meta name="twitter:image" content="//tusick.me/img/blogimg/2017-7-11/导出页面.png">
   
     <link rel="alternative" href="/atom.xml" title="生菜的博客" type="application/atom+xml">
   
@@ -147,36 +152,114 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-2017_7_11" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      ssm-导出报表
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/11/2017_7_11/" class="archive-article-date">
+
+        
+        <a href="/2017/07/11/2017_7_11/" class="archive-article-date">
   	<time datetime="2017-07-11T09:17:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-11</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/11/2017_7_11/">ssm-导出报表</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>实现导出报表的功能（不带时间范围把控，直接导出数据库表中相应字段的所有信息），直接上代码</p>
+<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><p>jsp文件里面，页面方面内容：</p>
+<pre><code>&lt;a onclick=&quot;exportexcel()&quot;   id=&quot;exportExcel&quot; class=&quot;btn btn-success&quot;  style=&quot;float: left;margin-left: 5px;&quot;&gt;导出报表&lt;/a&gt;
+</code></pre><a id="more"></a>
+<p>jsp文件里面，JS方面内容：</p>
+<pre><code>function exportexcel() {
+    &lt;%--$(&quot;#exprotExcel&quot;).attr(&apos;href&apos;,&quot;${base}/internetBarProtect/ExportExcel?dates=&quot;+$(&quot;#tdate&quot;).val()+&quot;/&quot;+$(&quot;#tdatetwo&quot;).val()+&quot;&amp;AreaName=&quot;+$(&quot;#areaselect&quot;).val());--%&gt;
+    $(&quot;#exportExcel&quot;).attr(&apos;href&apos;,&quot;${base}/internetBarProtect/ExportExcel&quot;);
+    $(&quot;#exportExcel&quot;).click();
+}
+</code></pre><hr>
+<ul>
+<li>controller.java 中</li>
+</ul>
+<pre><code>/**
+ * 导出EXCEL
+ * @param
+ * @return
+ *
+ */
+@RequestMapping(value=&quot;ExportExcel&quot;)
+public ModelAndView ExportExcel(){
+    ModelAndView view = new ModelAndView();
+    List&lt;List&lt;String&gt;&gt; list = new ArrayList&lt;&gt;();
+    HashMap&lt;String,Object&gt; hashMap = new HashMap&lt;&gt;();
+    User user = getLoginUser();
+    NumberFormat nf = java.text.NumberFormat.getInstance();
+    nf.setGroupingUsed(false);
+    Pages pages = new Pages();
+    pages.setNownum(0);
+    pages.setBack(internetBarProtectService.userfindbyParamToPageCount(hashMap));
+    List&lt;InternetBarUser&gt; ints = internetBarProtectService.userfindbyParamToPage(hashMap,pages);
+    for(InternetBarUser in:ints){
+        List&lt;String&gt; out = new ArrayList&lt;&gt;();
+        out.add(in.getCityarea());
+        out.add(in.getInternetBar());
+        out.add(in.getUsername());
+        out.add(in.getContacts());
+        out.add(in.getContactInformation());
+        list.add(out);
+    }
+    String title =&quot;网吧防护用户清单&quot;;
+    String name =&quot;网吧防护用户清单&quot;;
+    String[] heads = new String[]{&quot;县市&quot;,&quot;网吧/专线&quot;,&quot;用户名&quot;,&quot;联系人&quot;,&quot;联系方式&quot;};
+    view.setView(new ExcelViewGroupOne(title,name,heads,list));
+    return view;
+}
+</code></pre><hr>
+<p>service mapper xml 中的userfindbyParamToPageCount与userfindbyParamToPage不再叙述</p>
+<hr>
+<ul>
+<li>导出页面：</li>
+</ul>
+<p><img src="/img/blogimg/2017-7-11/导出页面.png">  </p>
+<hr>
+<ul>
+<li>导出后得到的报表：</li>
+</ul>
+<p><img src="/img/blogimg/2017-7-11/导出报表.png">  </p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>你太客气了^▽^<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -188,174 +271,88 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://tusick.me/2017/07/11/2017_7_11/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/10/2017_7_10/" class="archive-article-date">
-  	<time datetime="2017-07-10T06:26:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-10</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/10/2017_7_10/">ssm-文件上传</a>
-    </h1>
+  
+    <a href="/2017/07/10/2017_7_10/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ssm-文件上传</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/22/2017_6_22/" class="archive-article-date">
-  	<time datetime="2017-06-22T09:11:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/22/2017_6_22/">ssm中的详情弹出</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/21/2017_6_21/" class="archive-article-date">
-  	<time datetime="2017-06-21T09:11:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/21/2017_6_21/">ssm中的模板文件下载</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/26/2017_5_26/" class="archive-article-date">
-  	<time datetime="2017-05-26T08:26:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/26/2017_5_26/">mybatis的分页查询</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2017/page/2/">2</a><a class="extend next" rel="next" href="/archives/2017/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -379,8 +376,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

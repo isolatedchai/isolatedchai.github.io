@@ -6,17 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="//tusick.me">
-  <title>Archives: 2017 | 生菜的博客</title>
+  <title>ssm-文件上传 | 生菜的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端小白一枚，目前努力深造中">
-<meta property="og:type" content="website">
-<meta property="og:title" content="生菜的博客">
-<meta property="og:url" content="//tusick.me/archives/2017/index.html">
+  <meta name="description" content="生活所想">
+<meta name="keywords" content="ssm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssm-文件上传">
+<meta property="og:url" content="//tusick.me/2017/07/10/2017_7_10/index.html">
 <meta property="og:site_name" content="生菜的博客">
-<meta property="og:description" content="前端小白一枚，目前努力深造中">
+<meta property="og:description" content="生活所想">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-7-10/页面原.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-7-10/sql设计.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-7-10/sql表.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-7-10/excel.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-7-10/页面选择文件.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-7-10/页面导入成功.png">
+<meta property="og:image" content="//tusick.me/img/blogimg/2017-7-10/sql表更新.png">
+<meta property="og:updated_time" content="2017-07-10T07:00:03.131Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="生菜的博客">
-<meta name="twitter:description" content="前端小白一枚，目前努力深造中">
+<meta name="twitter:title" content="ssm-文件上传">
+<meta name="twitter:description" content="生活所想">
+<meta name="twitter:image" content="//tusick.me/img/blogimg/2017-7-10/页面原.png">
   
     <link rel="alternative" href="/atom.xml" title="生菜的博客" type="application/atom+xml">
   
@@ -147,74 +157,351 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2017_7_10" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/11/2017_7_11/" class="archive-article-date">
-  	<time datetime="2017-07-11T09:17:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/11/2017_7_11/">ssm-导出报表</a>
+    <h1 class="article-title" itemprop="name">
+      ssm-文件上传
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/10/2017_7_10/" class="archive-article-date">
+        
+        <a href="/2017/07/10/2017_7_10/" class="archive-article-date">
   	<time datetime="2017-07-10T06:26:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-10</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/10/2017_7_10/">ssm-文件上传</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ssm框架中的文件上传功能，直接导入excel表插入信息</p>
+<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><p>jsp文件里面，页面方面内容：</p>
+<pre><code>&lt;form id=&quot;uploadexcle2&quot; action=&quot;${base}/internetBarProtect/uploadOriginExcel2&quot; method=&quot;post&quot;
+      enctype=&quot;multipart/form-data&quot;&gt;
+&lt;div id=&quot;userlevelshow2&quot; style=&quot;float:left;margin-left:5px&quot;&gt;
+    &lt;a class=&quot;btn btn-success&quot; id=&quot;chooseFileBtn2&quot; onclick=&quot;chooseFileF2()&quot;&gt;选择文件&lt;/a&gt;
+    &lt;input type=&quot;file&quot; name=&quot;upfile2&quot; onchange=&quot;insertValue2()&quot; id=&quot;chooseFile2&quot;
+           multiple=&quot;multiple&quot; style=&quot;display: none;&quot;/&gt;
+    &lt;a href=&quot;javascript:dosend2();&quot; class=&quot;btn btn-success&quot;&gt;导入报表&lt;/a&gt;
+&lt;/div&gt;
+&lt;/form&gt;
 
-        <div class="article-info info-on-right">
-          
+#外层 作为加载框
+&lt;div class=&quot;container&quot; id=&quot;loading2&quot; style=&quot;display:none; z-index: 999999999&quot;&gt;
+
+&lt;div id=&quot;row2&quot; style=&quot;position: absolute;top: 200px;left: 50%;margin-left: -50px;&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn btn-success btn-lg ladda-button center-block&quot; id=&quot;showmore2&quot;
+        data-style=&quot;contract-overlay&quot;&gt;
+    &lt;span class=&quot;ladda-label&quot;&gt;&lt;/span&gt;
+    &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</code></pre><a id="more"></a>
+<p>页面端的初始界面</p>
+<p><img src="/img/blogimg/2017-7-10/页面原.png">   </p>
+<hr>
+<p>jsp文件里面，js方面内容：</p>
+<pre><code>var maxnum2 = 1;
+var curFiles2 = [];
+
+//文件导入
+function chooseFileF2(){
+    var ChooseFileBtnSun2 = $(&apos;#fileText2&apos;).find(&apos;p&apos;).length;
+    if(ChooseFileBtnSun2 &lt; maxnum2){
+        $(&apos;#chooseFile2&apos;).click();
+    }else{
+        alert(&quot;只能选择一个！！！&quot;);
+    }
+}
+
+
+//选择文件 显示
+function insertValue2(){
+    var chooseFileA2 = document.getElementById(&quot;chooseFile2&quot;);
+    var fileTextA2 = document.getElementById(&quot;fileText2&quot;);
+    var files2 = chooseFileA2.files;    //此files非彼files
+
+    if(files2 &amp;&amp; files2.length){
+        Array.prototype.push.apply(curFiles2,files2);
+    }
+
+    if(files2.length &gt; maxnum2){
+        alert(&quot;只能选一个！！！&quot;)
+        curFiles2=[];
+    }else{
+        for(var i=0;i&lt;chooseFileA2.files.length;i++){
+            fileTextA2.innerHTML +=&quot;&lt;p&gt;&quot;+chooseFileA2.files[i].name+&quot;&lt;a onclick=&apos;deleteP2(this)&apos; &quot; +
+                &quot; style=&apos;margin-left:10px;&apos; class=&apos;btn btn-success&apos;&gt;删除&lt;/a&gt;&quot; + &quot;&lt;/p&gt;&quot;;
+        }
+    }
+}
+
+//删除已选择的文件
+function deleteP2(obj){
+    var fileTextA2 = document.getElementById(&quot;fileText2&quot;);
+    var localN2 = $(obj).parent().prevAll().length;
+
+    var chooseFileA2 = document.getElementById(&quot;chooseFile2&quot;);
+    curFiles2.splice(localN2,1);
+    obj.parentNode.remove(true);
+
+    //上传文件的数组
+    console.log(curFiles2);
+
+}
+
+
+function dosend2() {
+        $showmore2 = $(&apos;#showmore2&apos;);
+        $(&quot;#loading2&quot;).css(&quot;display&quot;, &quot;block&quot;);
+        $showmore2.bind(&apos;click&apos;, loadshots2);
+        $showmore2.trigger(&apos;click&apos;);
+}
+
+function loadshots2() {
+    var l = Ladda.create(this);
+    l.start();
+    $(&apos;.ladda-label&apos;).text(&apos;加载中...&apos;);
+    ajaxSubmit($(&quot;#uploadexcle2&quot;), function a(data) {
+        $(&quot;#tdatemiddle&quot;).val(&quot;&quot;);
+        $(&quot;#loading2&quot;).css(&quot;display&quot;, &quot;none&quot;);
+        $(&quot;#uploadtype&quot;).val(1);
+        $(&apos;#showmore2&apos;).unbind(&apos;click&apos;);
+        l.stop();
+        tanchu(data.msg, data.code);
+
+    });
+    $(&quot;#uploadtype&quot;).val(1);
+}
+
+function tanchu(msgs, code) {
+    if (code == 2) {
+        Ewin.confirm({message: msgs}).on(function (e) {
+            if (!e) {
+                return;
+            } else {
+                $(&quot;#uploadtype&quot;).val(2);
+                dosend2();
+            }
+        });
+    } else {
+        Ewin.confirm({message: msgs}).on(function (e) {
+            if (!e) {
+                return;
+            } else {
+                return;
+            }
+        });
+    }
+}
+</code></pre><hr>
+<p>controller.java 中</p>
+<pre><code>/**
+ * 上传
+ * @param file
+ * @return
+ *
+ */
+@RequestMapping(value=&quot;uploadOriginExcel2&quot;)
+@ResponseBody
+public String uploaddetail2(@RequestParam(value=&quot;upfile2&quot;,required = false)MultipartFile file){
+
+    Message msg = new Message();
+    String url=&quot;&quot;;
+    if(file!=null){
+        String prefix = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf(&quot;.&quot;)+1);
+        if(file.getOriginalFilename().lastIndexOf(&quot;.&quot;)&gt;=0&amp;&amp;(prefix.equals(&quot;xls&quot;)||prefix.equals(&quot;xlsx&quot;))){
+            url = FileUtil.saveExcel(file);
+            List&lt;String[]&gt; valuelist = new ArrayList&lt;String[]&gt;();
+            System.out.println(url);
+            File fileone = new File(url);
+            ExcelImpUtil eiu = new ExcelImpUtil();
+            try{
+                valuelist = eiu.getDataFromExcel(new FileInputStream(fileone),file.getOriginalFilename(),0,1,0);
+                User user = getLoginUser();
+                String returnMsg=&quot;&quot;;
+
+                String[] re = internetBarProtectService.insertallInternetUser(valuelist,user.getId());
+
+                if(re[0].equals(&quot;1&quot;)){
+                    if(re[1].length()&gt;1){
+                        String[] single = re[1].split(&quot;,&quot;);
+                        for(String b:single){
+                            returnMsg = b + &quot;&lt;br&gt;&quot; + returnMsg;
+                        }
+                    }
+                    try{
+                        msg.setCode(1);
+                        if(returnMsg.length()&gt;1){
+                            msg.setMsg(returnMsg+&quot;没有找到地址&quot;);
+                        }else{
+                            msg.setMsg(&quot;导入成功&quot;);
+                        }
+                    }catch(Exception ex){
+                        msg.setCode(0);
+                        msg.setMsg(&quot;服务器错误&quot;);
+                        ex.printStackTrace();
+                    }
+                }else if(re[0].equals(&quot;2&quot;)){
+                    msg.setCode(0);
+                    msg.setMsg(re[2]);
+                }else if(!re[0].equals(&quot;1&quot;)){
+                    msg.setCode(0);
+                    msg.setMsg(&quot;服务器错误&quot;);
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
+                internetBarProtectService.deleteuserSamebefore();
+                FileUtil.deleteFile(url);
+            }
+        }else{
+            msg.setCode(0);
+            msg.setMsg(&quot;文件格式错误&quot;);
+        }
+
+    }else{
+        msg.setCode(0);
+        msg.setMsg(&quot;请选择文件&quot;);
+    }
+    return JSON.toJSONString(msg);
+
+
+
+}
+</code></pre><hr>
+<p>service.java 中</p>
+<pre><code>public final static String[] InternetBarUserExcelModel={&quot;县市&quot;,&quot;网吧/专线&quot;,&quot;用户名&quot;,&quot;联系人&quot;,&quot;联系方式&quot;};
+
+public int deleteuserSamebefore(){      //上传中出现重复的，重复的替换原来的
+    DataSourceContextHolder. setDbType(DataSourceType.CLOUDDATABASE);
+    return internetBarProtectMapper.deleteuserSamebefore();
+}
+
+
+public String[] insertallInternetUser(List&lt;String[]&gt; valuelist,Long userid)throws Exception{
+
+    String[] a = new String[3];
+    a[1] = &quot;&quot;;
+    String[] firstline = valuelist.get(0);
+    valuelist.remove(0);    //去除第一行的各个列名
+    Map&lt;String,Object&gt; firstResult = ExcelModelFactory.CompareFirstLine(firstline,InternetBarUserExcelModel);
+    if(firstResult.get(&quot;flag&quot;)!=null &amp;&amp; (Integer)firstResult.get(&quot;flag&quot;)==0){
+        List&lt;Integer&gt; position = (List&lt;Integer&gt;) firstResult.get(&quot;position&quot;);
+        for(String[] listone : valuelist){
+            InternetBarUser i1 = new InternetBarUser();
+            i1.setId(UuidUtil.get32UUID());
+            i1.setCityarea(listone[position.get(0)].substring(0,listone[position.get(0)].trim().length()));     //第一个0 获取放在第一列的信息 、 第二个0 从第一个字符开始获取该格 、 
+            i1.setInternetBar(listone[position.get(1)].substring(0,listone[position.get(1)].trim().length()));
+            i1.setUsername(listone[position.get(2)].substring(0,listone[position.get(2)].trim().length()));
+            i1.setContacts(listone[position.get(3)].substring(0,listone[position.get(3)].trim().length()));
+            i1.setContactInformation(listone[position.get(4)].substring(0,listone[position.get(4)].trim().length()));
+            i1.setCreateTime(new Date());
+            i1.setCreateid(userid);
+            a[2] = &quot;&quot;;
+            a[0] = String.valueOf(internetBarUserInsert(i1));
+        }
+        deleteuserSamebefore();
+
+    }else{
+        a[0] = &quot;2&quot;;
+        a[2] = &quot;excel缺少（&quot;+String.valueOf(firstResult.get(&quot;nohere&quot;))+&quot;）这些列&quot;;
+
+
+    }
+    return a;
+
+}
+</code></pre><hr>
+<p>mapper.java 中</p>
+<pre><code>public int deleteuserSamebefore();
+
+public int internetBarUserInsert(InternetBarUser internetBarUser);
+</code></pre><hr>
+<p>xml中</p>
+<pre><code>&lt;delete id=&quot;deleteuserSamebefore&quot;&gt;
+    &lt;![CDATA[
+     DELETE MONITOR_INTERNETBARUSER t where t.id in (
+          SELECT A.id
+      FROM (SELECT ROW_NUMBER() OVER(PARTITION BY us.cityarea,us.internetBar,us.username,us.contacts,us.contactInformation  ORDER BY us.createTime desc) R,us.id
+      FROM MONITOR_INTERNETBARUSER us) A where a.r&gt;1)
+  ]]&gt;
+&lt;/delete&gt;
+
+&lt;insert id=&quot;internetBarUserInsert&quot; parameterType=&quot;InternetBarUser&quot;&gt;
+    INSERT INTO MONITOR_INTERNETBARUSER (
+    id,cityarea,internetBar,username,contacts,contactInformation,createid,createTime
+    )
+    VALUES (
+    #{id,jdbcType=VARCHAR},#{cityarea,jdbcType=VARCHAR},#{internetBar,jdbcType=VARCHAR},#{username,jdbcType=VARCHAR},#{contacts,jdbcType=VARCHAR},
+    #{contactInformation,jdbcType=VARCHAR},
+    #{createid},#{createTime}
+    )
+&lt;/insert&gt;
+</code></pre><p>#关于controller service 中的 插入 在这里不作详细代码展示</p>
+<hr>
+<ul>
+<li>sql设计表：</li>
+</ul>
+<p><img src="/img/blogimg/2017-7-10/sql设计.png">   </p>
+<hr>
+<ul>
+<li>sql表：</li>
+</ul>
+<p><img src="/img/blogimg/2017-7-10/sql表.png">   </p>
+<hr>
+<ul>
+<li>待导入的excel表:</li>
+</ul>
+<p><img src="/img/blogimg/2017-7-10/excel.png">   </p>
+<hr>
+<ul>
+<li>页面选择文件：</li>
+</ul>
+<p><img src="/img/blogimg/2017-7-10/页面选择文件.png">   </p>
+<hr>
+<ul>
+<li>页面导入成功：</li>
+</ul>
+<p><img src="/img/blogimg/2017-7-10/页面导入成功.png">   </p>
+<hr>
+<ul>
+<li>sql表更新：</li>
+</ul>
+<p><img src="/img/blogimg/2017-7-10/sql表更新.png">  </p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>你太客气了^▽^<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -226,136 +513,97 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://tusick.me/2017/07/10/2017_7_10/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/22/2017_6_22/" class="archive-article-date">
-  	<time datetime="2017-06-22T09:11:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/22/2017_6_22/">ssm中的详情弹出</a>
-    </h1>
+    <a href="/2017/07/11/2017_7_11/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ssm-导出报表
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/22/2017_6_22/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ssm中的详情弹出</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/21/2017_6_21/" class="archive-article-date">
-  	<time datetime="2017-06-21T09:11:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/21/2017_6_21/">ssm中的模板文件下载</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/26/2017_5_26/" class="archive-article-date">
-  	<time datetime="2017-05-26T08:26:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/26/2017_5_26/">mybatis的分页查询</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2017/page/2/">2</a><a class="extend next" rel="next" href="/archives/2017/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -379,8 +627,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
