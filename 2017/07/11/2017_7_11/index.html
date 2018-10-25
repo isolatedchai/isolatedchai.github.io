@@ -17,7 +17,7 @@
 <meta property="og:description" content="生活所想">
 <meta property="og:image" content="//tusick.me/img/blogimg/2017-7-11/导出页面.png">
 <meta property="og:image" content="//tusick.me/img/blogimg/2017-7-11/导出报表.png">
-<meta property="og:updated_time" content="2017-07-10T09:17:58.694Z">
+<meta property="og:updated_time" content="2017-07-10T09:30:31.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssm-导出报表">
 <meta name="twitter:description" content="生活所想">
@@ -197,7 +197,6 @@ public ModelAndView ExportExcel(){
     ModelAndView view = new ModelAndView();
     List&lt;List&lt;String&gt;&gt; list = new ArrayList&lt;&gt;();
     HashMap&lt;String,Object&gt; hashMap = new HashMap&lt;&gt;();
-    User user = getLoginUser();
     NumberFormat nf = java.text.NumberFormat.getInstance();
     nf.setGroupingUsed(false);
     Pages pages = new Pages();
@@ -363,7 +362,7 @@ public ModelAndView ExportExcel(){
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 Tusick
+    		&copy; 2018 Tusick
     	</div>
       	<div class="footer-right">
       		thanks Litten's <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yiliaaa</a> here!
